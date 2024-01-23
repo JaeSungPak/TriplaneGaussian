@@ -387,6 +387,8 @@ class GS3DRenderer(BaseModule):
         out = {k: torch.stack(v, dim=0) for k, v in out.items()}
         out["3dgs"] = gs
 
+        import pdb; pdb.set_trace()
+
         return out
 
     def forward(self, 
