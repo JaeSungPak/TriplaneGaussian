@@ -110,9 +110,9 @@ class GaussianModel(NamedTuple):
         xyz = self.xyz.detach().cpu().numpy()
         xyz_ = self.xyz.detach().cpu().numpy()
 
-        xyz[:, 0] = xyz_[:, 2]
-        xyz[:, 1] = xyz_[:, 0]
-        xyz[:, 2] = xyz_[:, 1]
+        xyz[:, 0] = xyz_[:, 1]
+        xyz[:, 1] = xyz_[:, 2]
+        xyz[:, 2] = xyz_[:, 0]
 
         normals = np.zeros_like(xyz)
         features_dc = self.shs[:, :1]
