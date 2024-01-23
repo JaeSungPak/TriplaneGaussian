@@ -146,6 +146,8 @@ class TGS(torch.nn.Module, SaverMixin):
         out = self._forward(batch)
         batch_size = batch["index"].shape[0]
         for b in range(batch_size):
+
+            import pdb; pdb.set_trace()
             if batch["view_index"][b, 0] == 0:
                 out["3dgs"][b].save_ply(self.get_save_path(f"3dgs/{batch['instance_id'][b]}.ply"))
 
