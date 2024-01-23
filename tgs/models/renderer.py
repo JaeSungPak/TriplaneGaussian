@@ -125,6 +125,12 @@ class GaussianModel(NamedTuple):
         el = PlyElement.describe(elements, 'vertex')
         PlyData([el]).write(path)
 
+    def load_ply(self, path):
+        plydata = PlyData.read(path)
+
+        import pdb; pdb.set_trace()
+
+
 class GSLayer(BaseModule):
     @dataclass
     class Config(BaseModule.Config):
