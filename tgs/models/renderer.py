@@ -14,6 +14,7 @@ from tgs.utils.ops import trunc_exp
 from tgs.models.networks import MLP
 from tgs.utils.ops import scale_tensor
 from einops import rearrange, reduce
+from scipy.spatial.transform import Rotation
 
 inverse_sigmoid = lambda x: np.log(x / (1 - x))
 
@@ -108,11 +109,11 @@ class GaussianModel(NamedTuple):
     def save_ply(self, path):
         
         xyz = self.xyz.detach().cpu().numpy()
-        # xyz_ = self.xyz.detach().cpu().numpy()
+        xyz_ = self.xyz.detach().cpu().numpy()
 
-        # xyz[:, 0] = xyz_[:, 1]
-        # xyz[:, 1] = -xyz_[:, 2]
-        # xyz[:, 2] = -xyz_[:, 0]
+        xyz[:, 0] = xyz_[:, 1]
+        xyz[:, 1] = -xyz_[:, 2]
+        xyz[:, 2] = -xyz_[:, 0]
 
         normals = np.zeros_like(xyz)
         features_dc = self.shs[:, :1]
@@ -125,6 +126,9 @@ class GaussianModel(NamedTuple):
 
         dtype_full = [(attribute, 'f4') for attribute in self.construct_list_of_attributes()]
 
+        qu = np.array([0.707107,0,0,0.707107])
+        rotate = rotation = Rotation.from_quat(qu)
+        rotation = rotate.apply(rotation)
         import pdb; pdb.set_trace()
 
         elements = np.empty(xyz.shape[0], dtype=dtype_full)
