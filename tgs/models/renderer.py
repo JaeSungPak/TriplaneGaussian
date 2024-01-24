@@ -117,6 +117,8 @@ class GaussianModel(NamedTuple):
         scale = np.log(self.scaling.detach().cpu().numpy())
         rotation = self.rotation.detach().cpu().numpy()
 
+        xyz[:, :] *= 1.3
+
         import pdb; pdb.set_trace()
 
         dtype_full = [(attribute, 'f4') for attribute in self.construct_list_of_attributes()]
