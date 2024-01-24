@@ -110,7 +110,7 @@ class GaussianModel(NamedTuple):
         
         xyz = self.xyz.detach().cpu().numpy()
 
-        r = Rotation.from_rotvec(np.pi/2 * np.array([1, 0, 0]))
+        r = Rotation.from_rotvec(np.pi/2 * np.array([-1, 0, 0]))
         xyz = r.apply(xyz)
 
         normals = np.zeros_like(xyz)
