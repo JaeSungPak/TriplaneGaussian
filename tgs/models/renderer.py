@@ -108,6 +108,10 @@ class GaussianModel(NamedTuple):
     def save_ply(self, path):
         
         xyz = self.xyz.detach().cpu().numpy()
+        xyz_ = self.xyz.detach().cpu().numpy()
+
+        xyz[:, 0] = -xyz_[:, 0]
+
         normals = np.zeros_like(xyz)
         features_dc = self.shs[:, :1]
         features_rest = self.shs[:, 1:]
