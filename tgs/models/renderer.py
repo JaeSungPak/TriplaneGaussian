@@ -14,7 +14,6 @@ from tgs.utils.ops import trunc_exp
 from tgs.models.networks import MLP
 from tgs.utils.ops import scale_tensor
 from einops import rearrange, reduce
-from scipy.spatial.transform import Rotation
 
 inverse_sigmoid = lambda x: np.log(x / (1 - x))
 
