@@ -116,7 +116,6 @@ class GaussianModel(NamedTuple):
         f_rest = features_rest.detach().flatten(start_dim=1).contiguous().cpu().numpy()
         opacities = inverse_sigmoid(torch.clamp(self.opacity, 1e-3, 1 - 1e-3).detach().cpu().numpy())
         scale = np.log(self.scaling.detach().cpu().numpy())
-        scale_ = np.log(self.scaling.detach().cpu().numpy())
         rotation = self.rotation.detach().cpu().numpy()
 
         xyz[:, 0] = xyz_[:, 1]
