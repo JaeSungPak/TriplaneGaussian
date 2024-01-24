@@ -126,9 +126,6 @@ class GaussianModel(NamedTuple):
 
         dtype_full = [(attribute, 'f4') for attribute in self.construct_list_of_attributes()]
 
-        qu = np.array([0.707107,0,0,0.707107])
-        rotate = rotation = Rotation.from_quat(qu)
-        rotation = rotate.apply(rotation)
         import pdb; pdb.set_trace()
 
         elements = np.empty(xyz.shape[0], dtype=dtype_full)
