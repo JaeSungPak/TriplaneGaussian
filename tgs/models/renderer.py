@@ -91,7 +91,7 @@ class GaussianModel(NamedTuple):
     shs: Tensor
 
     def construct_list_of_attributes(self):
-        l = ['x', 'y', 'z', 'nx', 'ny', 'nz']
+        l = ['y', 'z', 'x', 'ny', 'nz', 'nx']
         features_dc = self.shs[:, :1]
         features_rest = self.shs[:, 1:]
         for i in range(features_dc.shape[1]*features_dc.shape[2]):
