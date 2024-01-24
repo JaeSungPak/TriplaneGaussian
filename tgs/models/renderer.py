@@ -118,17 +118,24 @@ class GaussianModel(NamedTuple):
         scale = np.log(self.scaling.detach().cpu().numpy())
         scale_ = np.log(self.scaling.detach().cpu().numpy())
         rotation = self.rotation.detach().cpu().numpy()
-        rotation_ = self.rotation.detach().cpu().numpy()
 
         xyz[:, 0] = xyz_[:, 1]
         xyz[:, 1] = xyz_[:, 2]
         xyz[:, 2] = xyz_[:, 0]
         xyz[:, :] *= 1.3
 
-        scale[:, 0] = scale_[:, 1]
-        scale[:, 1] = scale_[:, 2]
-        scale[:, 2] = scale_[:, 0]
+        from scipy.spatial.transform import Rotation as R
+        rotation_quat = R.from_quat(rotation)
 
+        rotation_vec = rotation_quat.as_euler('xyz')
+        rotation_vec_ = rotation_quat.as_euler('xyz')
+
+        rotation_vec[:, 0] = rotation_vec_[:, 1]
+        rotation_vec[:, 1] = rotation_vec_[:, 2]
+        rotation_vec[:, 2] = rotation_vec_[:, 0]
+
+        rotation_vec = R.from_euler('xyz', rotation_vec)
+        rotation = rotation_vec.as_quat()
 
         dtype_full = [(attribute, 'f4') for attribute in self.construct_list_of_attributes()]
 
