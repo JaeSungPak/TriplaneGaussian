@@ -109,10 +109,6 @@ class GaussianModel(NamedTuple):
     def save_ply(self, path):
         
         xyz = self.xyz.detach().cpu().numpy()
-
-        r = Rotation.from_rotvec(np.pi/2 * np.array([-1, 0, 0]))
-        xyz = r.apply(xyz)
-
         normals = np.zeros_like(xyz)
         features_dc = self.shs[:, :1]
         features_rest = self.shs[:, 1:]
@@ -123,7 +119,6 @@ class GaussianModel(NamedTuple):
         rotation = self.rotation.detach().cpu().numpy()
 
         dtype_full = [(attribute, 'f4') for attribute in self.construct_list_of_attributes()]
-        import pdb; pdb.set_trace()
 
         elements = np.empty(xyz.shape[0], dtype=dtype_full)
         attributes = np.concatenate((xyz, normals, f_dc, f_rest, opacities, scale, rotation), axis=1)
