@@ -128,9 +128,7 @@ class GaussianModel(NamedTuple):
         scale[:, 0] = scale_[:, 1]
         scale[:, 1] = scale_[:, 2]
         scale[:, 2] = scale_[:, 0]
-        scale[:, :] *= 1.3
 
-        import pdb; pdb.set_trace()
 
         dtype_full = [(attribute, 'f4') for attribute in self.construct_list_of_attributes()]
 
