@@ -124,10 +124,6 @@ class GaussianModel(NamedTuple):
         xyz[:, 2] = xyz_[:, 0]
         xyz[:, :] *= 1.3
 
-        scale[:, 0] = scale_[:, 1]
-        scale[:, 1] = scale_[:, 2]
-        scale[:, 2] = scale_[:, 0]
-
         from scipy.spatial.transform import Rotation as R
         rotation_quat = R.from_quat(rotation)
 
@@ -140,6 +136,8 @@ class GaussianModel(NamedTuple):
 
         rotation_vec = R.from_euler('xyz', rotation_vec)
         rotation = rotation_vec.as_quat()
+
+        import pdb; pdb.set_trace()
 
         dtype_full = [(attribute, 'f4') for attribute in self.construct_list_of_attributes()]
 
