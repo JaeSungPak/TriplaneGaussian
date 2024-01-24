@@ -109,7 +109,7 @@ class GaussianModel(NamedTuple):
         
         xyz = self.xyz.detach().cpu().numpy()
         xyz_ = self.xyz.detach().cpu().numpy()
-        normals = np.zeros_like(xyz)
+        normals = np.ones_like(xyz)
         features_dc = self.shs[:, :1]
         features_rest = self.shs[:, 1:]
         f_dc = features_dc.detach().flatten(start_dim=1).contiguous().cpu().numpy()
