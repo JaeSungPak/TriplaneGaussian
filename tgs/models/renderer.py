@@ -126,15 +126,21 @@ class GaussianModel(NamedTuple):
         from scipy.spatial.transform import Rotation as R
         rotation_quat = R.from_quat(rotation)
 
-        rotation_vec = rotation_quat.as_euler('xyz')
-        rotation_vec_ = rotation_quat.as_euler('xyz')
+        rotation_vec = rotation_quat.as_euler('xyz', degrees=True)
+        rotation_vec[:] += [-90, 0, -90]
 
-        rotation_vec[:, 0] = rotation_vec_[:, 2]
-        rotation_vec[:, 1] = rotation_vec_[:, 1]
-        rotation_vec[:, 2] = rotation_vec_[:, 0]
-
-        rotation_vec = R.from_euler('xyz', rotation_vec)
+        rotation_vec = R.from_euler('xyz', rotation_vec, degrees=True)
         rotation = rotation_vec.as_quat()
+
+        # rotation_vec = rotation_quat.as_euler('xyz')
+        # rotation_vec_ = rotation_quat.as_euler('xyz')
+
+        # rotation_vec[:, 0] = rotation_vec_[:, 0]
+        # rotation_vec[:, 1] = rotation_vec_[:, 1]
+        # rotation_vec[:, 2] = rotation_vec_[:, 2]
+
+        # rotation_vec = R.from_euler('xyz', rotation_vec)
+        # rotation = rotation_vec.as_quat()
 
         import pdb; pdb.set_trace()
 
