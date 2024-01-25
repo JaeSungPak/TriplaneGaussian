@@ -211,8 +211,7 @@ class GS3DRenderer(BaseModule):
     class Config(BaseModule.Config):
         mlp_network_config: Optional[dict] = None
         gs_out: dict = field(default_factory=dict)
-        sh_degree: int = 0
-        # sh_degree: int = 3
+        sh_degree: int = 3
         scaling_modifier: float = 1.0
         random_background: bool = False
         radius: float = 1.0
@@ -270,8 +269,7 @@ class GS3DRenderer(BaseModule):
             scale_modifier=self.cfg.scaling_modifier,
             viewmatrix=viewpoint_camera.world_view_transform,
             projmatrix=viewpoint_camera.full_proj_transform.float(),
-            sh_degree=0,
-            #sh_degree=self.cfg.sh_degree,
+            sh_degree=self.cfg.sh_degree,
             campos=viewpoint_camera.camera_center,
             prefiltered=False,
             debug=False
