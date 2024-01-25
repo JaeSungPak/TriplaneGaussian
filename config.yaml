@@ -14,7 +14,7 @@ data:
 system:
   camera_embedder_cls: tgs.models.networks.MLP
   camera_embedder:
-    dim_in: 25  # c2w + [fx, fy, cx, cy]
+    dim_in: 25 # c2w + [fx, fy, cx, cy]
     dim_out: 768
     n_neurons: 768
     n_hidden_layers: 1
@@ -65,7 +65,7 @@ system:
   pointcloud_generator:
     camera_embedder_cls: tgs.models.networks.MLP
     camera_embedder:
-      dim_in: 25  # c2w + [fx, fy, cx, cy]
+      dim_in: 25 # c2w + [fx, fy, cx, cy]
       dim_out: 768
       n_neurons: 768
       n_hidden_layers: 1
@@ -117,7 +117,7 @@ system:
       radius: 1
       bounding: true
       use_fps: true
-      up_factors: [2,4]
+      up_factors: [2, 4]
       token_type: "image_token"
 
   pointcloud_encoder_cls: tgs.models.pointclouds.pointnet.LocalPoolPointnet
@@ -131,7 +131,7 @@ system:
 
   renderer_cls: tgs.models.renderer.GS3DRenderer
   renderer:
-    sh_degree: 3
+    sh_degree: 0
     radius: 0.6
     mlp_network_config:
       n_neurons: ${system.renderer.gs_out.in_channels}
