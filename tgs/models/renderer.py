@@ -130,8 +130,8 @@ class GaussianModel(NamedTuple):
         rotation_vec_ = rotation_quat.as_euler('xyz')
 
         rotation_vec[:, 0] = rotation_vec_[:, 0]
-        rotation_vec[:, 1] = rotation_vec_[:, 2]
-        rotation_vec[:, 2] = rotation_vec_[:, 1]
+        rotation_vec[:, 1] = rotation_vec_[:, 1]
+        rotation_vec[:, 2] = rotation_vec_[:, 2]
 
         rotation_vec = R.from_euler('xyz', rotation_vec)
         rotation = rotation_vec.as_quat()
