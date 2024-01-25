@@ -113,7 +113,8 @@ class GaussianModel(NamedTuple):
         features_dc = self.shs[:, :1]
         features_rest = self.shs[:, 1:]
         f_dc = features_dc.detach().flatten(start_dim=1).contiguous().cpu().numpy()
-        f_rest = features_rest.detach().flatten(start_dim=1).contiguous().cpu().numpy()
+        f_rest = features_dc.detach().flatten(start_dim=1).contiguous().cpu().numpy()
+        # f_rest = features_rest.detach().flatten(start_dim=1).contiguous().cpu().numpy()
         opacities = inverse_sigmoid(torch.clamp(self.opacity, 1e-3, 1 - 1e-3).detach().cpu().numpy())
         scale = np.log(self.scaling.detach().cpu().numpy())
         rotation = self.rotation.detach().cpu().numpy()
@@ -135,8 +136,6 @@ class GaussianModel(NamedTuple):
 
         rotation_vec = R.from_euler('xyz', rotation_vec)
         rotation = rotation_vec.as_quat()
-
-        opacities = np.ones_like(opacities)
 
         import pdb; pdb.set_trace()
 
