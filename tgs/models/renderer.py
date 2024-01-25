@@ -109,7 +109,7 @@ class GaussianModel(NamedTuple):
         
         xyz = self.xyz.detach().cpu().numpy()
         xyz_ = self.xyz.detach().cpu().numpy()
-        normals = np.ones_like(xyz)
+        normals = np.zeros_like(xyz)
         features_dc = self.shs[:, :1]
         features_rest = self.shs[:, 1:]
         f_dc = features_dc.detach().flatten(start_dim=1).contiguous().cpu().numpy()
@@ -135,6 +135,8 @@ class GaussianModel(NamedTuple):
 
         rotation_vec = R.from_euler('xyz', rotation_vec)
         rotation = rotation_vec.as_quat()
+
+        f_dc = np.zeros_like(f_dc)
 
         import pdb; pdb.set_trace()
 
