@@ -127,7 +127,7 @@ class GaussianModel(NamedTuple):
         rotation_quat = R.from_quat(rotation)
 
         rotation_vec = rotation_quat.as_euler('xyz', degrees=True)
-        rotation_vec[:] += [-90, 0, -90]
+        rotation_vec[:] += [90, 0, 90]
 
         rotation_vec = R.from_euler('xyz', rotation_vec, degrees=True)
         rotation = rotation_vec.as_quat()
