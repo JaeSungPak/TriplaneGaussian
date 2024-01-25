@@ -131,7 +131,7 @@ system:
 
   renderer_cls: tgs.models.renderer.GS3DRenderer
   renderer:
-    sh_degree: 1
+    sh_degree: 3
     radius: 0.6
     mlp_network_config:
       n_neurons: ${system.renderer.gs_out.in_channels}
