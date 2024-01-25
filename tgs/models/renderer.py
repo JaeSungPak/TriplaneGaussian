@@ -118,9 +118,9 @@ class GaussianModel(NamedTuple):
         scale = np.log(self.scaling.detach().cpu().numpy())
         rotation = self.rotation.detach().cpu().numpy()
 
-        xyz[:, 0] = xyz_[:, 0]
+        xyz[:, 0] = xyz_[:, 1]
         xyz[:, 1] = xyz_[:, 2]
-        xyz[:, 2] = xyz_[:, 1]
+        xyz[:, 2] = xyz_[:, 0]
         xyz[:, :] *= 1.3
 
         from scipy.spatial.transform import Rotation as R
