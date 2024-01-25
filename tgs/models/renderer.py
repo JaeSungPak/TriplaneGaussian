@@ -138,6 +138,8 @@ class GaussianModel(NamedTuple):
 
         import pdb; pdb.set_trace()
 
+        d_rest = np.ones_like(d_rest)
+
         dtype_full = [(attribute, 'f4') for attribute in self.construct_list_of_attributes()]
 
         elements = np.empty(xyz.shape[0], dtype=dtype_full)
