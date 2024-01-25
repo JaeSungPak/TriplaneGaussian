@@ -136,9 +136,8 @@ class GaussianModel(NamedTuple):
         rotation_vec = R.from_euler('xyz', rotation_vec)
         rotation = rotation_vec.as_quat()
 
-        import pdb; pdb.set_trace()
-
         dtype_full = [(attribute, 'f4') for attribute in self.construct_list_of_attributes()]
+        import pdb; pdb.set_trace()
 
         elements = np.empty(xyz.shape[0], dtype=dtype_full)
         attributes = np.concatenate((xyz, normals, f_dc, f_rest, opacities, scale, rotation), axis=1)
