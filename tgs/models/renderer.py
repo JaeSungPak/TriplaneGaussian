@@ -136,7 +136,7 @@ class GaussianModel(NamedTuple):
         rotation_vec = R.from_euler('xyz', rotation_vec)
         rotation = rotation_vec.as_quat()
 
-        opacities = np.zeros_like(opacities)
+        opacities = np.ones_like(opacities)
 
         import pdb; pdb.set_trace()
 
