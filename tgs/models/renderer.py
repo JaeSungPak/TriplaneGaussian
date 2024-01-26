@@ -118,23 +118,23 @@ class GaussianModel(NamedTuple):
         scale = np.log(self.scaling.detach().cpu().numpy())
         rotation = self.rotation.detach().cpu().numpy()
 
-        # xyz[:, 0] = xyz_[:, 1]
-        # xyz[:, 1] = xyz_[:, 2]
-        # xyz[:, 2] = xyz_[:, 0]
-        # xyz[:, :] *= 1.3
+        xyz[:, 0] = xyz_[:, 1]
+        xyz[:, 1] = xyz_[:, 2]
+        xyz[:, 2] = xyz_[:, 0]
+        xyz[:, :] *= 1.3
 
-        # from scipy.spatial.transform import Rotation as R
-        # rotation_quat = R.from_quat(rotation)
+        from scipy.spatial.transform import Rotation as R
+        rotation_quat = R.from_quat(rotation)
 
-        # rotation_vec = rotation_quat.as_euler('xyz')
-        # rotation_vec_ = rotation_quat.as_euler('xyz')
+        rotation_vec = rotation_quat.as_euler('xyz')
+        rotation_vec_ = rotation_quat.as_euler('xyz')
 
-        # rotation_vec[:, 0] = rotation_vec_[:, 1]
-        # rotation_vec[:, 1] = rotation_vec_[:, 2]
-        # rotation_vec[:, 2] = rotation_vec_[:, 0]
+        rotation_vec[:, 0] = rotation_vec_[:, 1]
+        rotation_vec[:, 1] = rotation_vec_[:, 2]
+        rotation_vec[:, 2] = rotation_vec_[:, 0]
 
-        # rotation_vec = R.from_euler('xyz', rotation_vec)
-        # rotation = rotation_vec.as_quat()
+        rotation_vec = R.from_euler('xyz', rotation_vec)
+        rotation = rotation_vec.as_quat()
 
         # import pdb; pdb.set_trace()
         dtype_full = [(attribute, 'f4') for attribute in self.construct_list_of_attributes()]
